@@ -26,7 +26,7 @@ const ENT_DATA = {
     {
       id: "neck",
       title: "Neck & Head",
-      icon: `<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M 12 88 C 22 76 20 54 24 38 C 28 18 48 8 68 16 C 76 20 80 26 82 32 C 79 34 74 35 73 38 C 75 41 77 43 78 46 C 72 49 68 50 72 56 C 76 60 68 64 62 62 C 58 68 60 78 84 88"/><path d="M 36 36 C 31 36 30 44 35 47 C 39 49 42 43 38 38" stroke-width="2.5"/><path d="M 52 54 C 54 63 53 73 55 82" stroke-width="2.5"/><path d="M 58 58 C 60 66 59 74 61 82" stroke-width="2.5"/></svg>`,
+      icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M 21 21 C 18 19 17.5 15.5 17.5 12 C 17.5 7 14.5 3 10.5 3 C 6.5 3 4.5 6 4.5 9.5 C 4.5 11 4 11.5 3.5 12.5 C 3 13.5 4 14.5 5 14.5 C 5.5 15.5 7 16.5 9.5 16.5 C 11 16.5 12.5 18 12.5 21"/><path d="M 12 9.5 C 11 9.5 10.5 11 11.5 12 C 12.5 13 13.5 11.5 13 10"/></svg>`,
       description: "Neck lumps, swollen glands, facial weakness, gland pain"
     },
     {
