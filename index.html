@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Specialist Outpatient Intake | ENT Clinical Assessment</title>
+  <meta name="description" content="Ear, Nose and Throat (ENT) Specialist Outpatient Pre-Consultation Intake System & EMR Generator.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Application Header -->
+  <header>
+    <div class="brand">
+      <div class="brand-badge-logo">ENT</div>
+      <div class="brand-title-group">
+        <h1>Specialist Outpatient Pre-Consultation Intake</h1>
+        <div class="brand-subtitle">Ear, Nose and Throat (ENT) Clinical Assessment & EMR Summary</div>
+      </div>
+    </div>
+
+    <div class="header-controls">
+      <!-- Mode Switcher -->
+      <div class="mode-tabs" role="tablist">
+        <button class="mode-btn active" id="btn-mode-patient" role="tab">
+          <span>📱</span> Patient Intake Form
+        </button>
+        <button class="mode-btn" id="btn-mode-doctor" role="tab">
+          <span>🩺</span> Clinician EMR Dashboard
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Clinical Presets Toolbar for Instant Testing -->
+  <div class="preset-bar">
+    <div class="preset-title">⚡ Clinical Demo Presets:</div>
+    <button class="preset-chip" data-preset="sudden_snhl">1. Sudden Hearing Loss (Urgent Red Flag)</button>
+    <button class="preset-chip" data-preset="head_neck_cancer_risk">2. Hoarseness & Neck Lump (Smoker)</button>
+    <button class="preset-chip" data-preset="chronic_sinusitis">3. Chronic Sinusitis & Anosmia</button>
+    <button class="preset-chip" data-preset="osa_snoring">4. Severe OSA & Snoring</button>
+  </div>
+
+  <main class="main-container">
+
+    <!-- ========================================================= -->
+    <!-- VIEW 1: PATIENT INTAKE FORM                               -->
+    <!-- ========================================================= -->
+    <section id="view-patient" class="view-section active-view">
+      
+      <!-- Progress Bar -->
+      <div class="kiosk-progress-container">
+        <div class="kiosk-progress-bar">
+          <div class="kiosk-progress-fill" id="progress-fill"></div>
+        </div>
+        <div class="kiosk-steps">
+          <span class="step-item active" id="step-lbl-1">1. Patient Details</span>
+          <span class="step-item" id="step-lbl-2">2. Symptoms</span>
+          <span class="step-item" id="step-lbl-3">3. Medical History</span>
+          <span class="step-item" id="step-lbl-4">4. Social History</span>
+          <span class="step-item" id="step-lbl-5">5. Review & Submit</span>
+        </div>
+      </div>
+
+      <!-- STEP 1: DEMOGRAPHICS & PRIMARY REGION -->
+      <div id="patient-step-1" class="step-card">
+        <div class="glass-card">
+          <h2 class="card-title">📋 Section A: Patient Information & Primary Concern</h2>
+          <p class="card-subtitle">Please complete this questionnaire while waiting for your specialist consultation. Your answers will assist the ENT clinical team.</p>
+          
+          <div class="section-header-bar">Demographic Details</div>
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="inp-fullname">Full Name *</label>
+              <input type="text" id="inp-fullname" class="form-input" placeholder="e.g. John Smith" value="John Smith">
+            </div>
+            <div class="form-group">
+              <label for="inp-dob">Date of Birth *</label>
+              <input type="date" id="inp-dob" class="form-input" value="1980-06-15">
+            </div>
+            <div class="form-group">
+              <label for="inp-gender">Gender</label>
+              <select id="inp-gender" class="form-select">
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other / Non-binary</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="inp-phone">Contact Phone Number</label>
+              <input type="tel" id="inp-phone" class="form-input" placeholder="0412 345 678" value="0412 345 678">
+            </div>
+            <div class="form-group">
+              <label for="inp-medicare">Medicare Card Number / Ref</label>
+              <input type="text" id="inp-medicare" class="form-input" placeholder="2123 45678 1" value="2123 45678 1">
+            </div>
+          </div>
+
+          <div class="section-header-bar">Select Affected Anatomical Area(s) *</div>
+          <p style="font-size:0.875rem; color:var(--text-secondary); margin-bottom:1rem;">Select all regions relevant to your consultation today:</p>
+          
+          <div class="region-grid" id="region-selector">
+            <!-- Populated dynamically via JS -->
+          </div>
+
+          <div class="btn-group">
+            <div></div>
+            <button class="btn btn-primary" id="btn-step1-next">Continue to Symptom Assessment ➔</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 2: DYNAMIC SYMPTOM ASSESSMENT -->
+      <div id="patient-step-2" class="step-card" style="display:none;">
+        <div class="glass-card">
+          <h2 class="card-title">🩺 Section B: Detailed Symptom Assessment</h2>
+          <p class="card-subtitle">Please specify details regarding your selected ENT symptoms.</p>
+          
+          <div id="dynamic-symptom-container">
+            <!-- Dynamic questions injected here by JS -->
+          </div>
+
+          <div class="btn-group">
+            <button class="btn btn-secondary" id="btn-step2-prev">⬅ Back</button>
+            <button class="btn btn-primary" id="btn-step2-next">Continue to Medical History ➔</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 3: MEDICAL & SURGICAL HISTORY -->
+      <div id="patient-step-3" class="step-card" style="display:none;">
+        <div class="glass-card">
+          <h2 class="card-title">💊 Section C: Past Medical & Surgical History</h2>
+          <p class="card-subtitle">Assists clinicians with safe medication prescribing, anesthesia, and procedure planning.</p>
+
+          <!-- Medical Conditions -->
+          <div class="form-group" style="margin-bottom:1.5rem;">
+            <div class="section-header-bar">Pre-Existing Medical Conditions (Check all that apply)</div>
+            <div class="checkbox-grid">
+              <label class="checkbox-pill"><input type="checkbox" name="med-cond" value="Hypertension"> High Blood Pressure</label>
+              <label class="checkbox-pill"><input type="checkbox" name="med-cond" value="Diabetes"> Diabetes Mellitus</label>
+              <label class="checkbox-pill"><input type="checkbox" name="med-cond" value="Asthma"> Asthma / Reactive Airway</label>
+              <label class="checkbox-pill"><input type="checkbox" name="med-cond" value="COPD"> COPD / Emphysema</label>
+              <label class="checkbox-pill"><input type="checkbox" name="med-cond" value="Allergic Rhinitis"> Hay Fever / Allergies</label>
+              <label class="checkbox-pill"><input type="checkbox" name="med-cond" value="GORD / Acid Reflux"> Acid Reflux / GORD</label>
+              <label class="checkbox-pill"><input type="checkbox" name="med-cond" value="Heart Disease"> Heart Condition / Stent</label>
+              <label class="checkbox-pill"><input type="checkbox" name="med-cond" value="Stroke / TIA"> Stroke / TIA</label>
+              <label class="checkbox-pill"><input type="checkbox" name="med-cond" value="Bleeding Disorder"> Bleeding Disorder / Anticoagulated</label>
+              <label class="checkbox-pill"><input type="checkbox" name="med-cond" value="Has medical conditions (Unsure of exact names)"> ❓ Have medical conditions, but UNSURE of exact names</label>
+            </div>
+          </div>
+
+          <!-- Medications Quick Ticks & Inputs -->
+          <div style="background:#f8fafc; border:1px solid var(--border-card); border-radius:var(--radius-md); padding:1.25rem; margin-bottom:1.5rem;">
+            <div class="section-header-bar" style="margin-top:0;">Current Medication Intake Helper</div>
+            <p style="font-size:0.85rem; color:var(--text-secondary); margin-bottom:0.75rem;">If you do not recall exact medication names, please tick all applicable options below:</p>
+            
+            <div class="checkbox-grid" style="margin-bottom:1rem;">
+              <label class="checkbox-pill"><input type="checkbox" name="med-quick" value="Takes regular medications (Unsure of exact names/dosages)"> 💊 Take regular medications, but UNSURE of exact names</label>
+              <label class="checkbox-pill"><input type="checkbox" name="med-quick" value="Bringing medication list / physical box to consult"> 👜 Bringing physical medication list/bag to consultation</label>
+              <label class="checkbox-pill"><input type="checkbox" name="med-quick" value="Takes Blood Thinners / Anticoagulants (e.g. Warfarin, Aspirin, Xarelto, Eliquis)"> 🩸 Take Blood Thinners / Anticoagulants (e.g. Warfarin, Aspirin, Xarelto)</label>
+              <label class="checkbox-pill"><input type="checkbox" name="med-quick" value="Takes Blood Pressure / Heart medications"> ❤️ Take Blood Pressure / Heart medications</label>
+              <label class="checkbox-pill"><input type="checkbox" name="med-quick" value="Takes Steroids / Immunosuppressants"> 🛡️ Take Steroids or Immunosuppressants</label>
+            </div>
+
+            <div class="form-group">
+              <label for="inp-medications">Specific Medication Names & Dosages (Optional):</label>
+              <input type="text" id="inp-medications" class="form-input" placeholder="e.g. Perindopril 5mg daily, Ventolin PRN (or leave blank if ticked above)">
+            </div>
+          </div>
+
+          <!-- Surgeries & Allergies -->
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="inp-surgeries">Past Operations & Surgeries</label>
+              <input type="text" id="inp-surgeries" class="form-input" placeholder="e.g. Tonsillectomy 2005">
+              <label class="checkbox-pill" style="margin-top:0.4rem; padding:0.4rem 0.75rem; font-size:0.8rem;"><input type="checkbox" id="chk-surgery-unsure"> ❓ Had surgeries, but UNSURE of exact dates/names</label>
+            </div>
+            
+            <div class="form-group">
+              <label for="inp-allergies">Medication Allergies & Adverse Reactions</label>
+              <input type="text" id="inp-allergies" class="form-input" placeholder="e.g. Penicillin (Rash) or 'Nil known drug allergies'">
+              <div style="display:flex; gap:0.5rem; margin-top:0.4rem;">
+                <label class="checkbox-pill" style="padding:0.4rem 0.75rem; font-size:0.8rem;"><input type="checkbox" id="chk-nkda"> ✅ Nil Known Drug Allergies (NKDA)</label>
+                <label class="checkbox-pill" style="padding:0.4rem 0.75rem; font-size:0.8rem;"><input type="checkbox" id="chk-allergy-unsure"> ❓ Have allergies (Unsure drug name)</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="btn-group">
+            <button class="btn btn-secondary" id="btn-step3-prev">⬅ Back</button>
+            <button class="btn btn-primary" id="btn-step3-next">Continue to Social History ➔</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 4: SOCIAL HISTORY & LIFESTYLE SCREEN -->
+      <div id="patient-step-4" class="step-card" style="display:none;">
+        <div class="glass-card">
+          <h2 class="card-title">🚬 Section D: Social & Lifestyle History</h2>
+          <p class="card-subtitle">Lifestyle risk factors are vital in ENT clinical decision-making (vocal pathology, snoring, head & neck oncology screening).</p>
+
+          <!-- Tobacco / Smoking -->
+          <div style="background:#f8fafc; border:1px solid var(--border-card); border-radius:var(--radius-md); padding:1.25rem; margin-bottom:1.25rem;">
+            <div class="section-header-bar" style="margin-top:0;">1. Tobacco & Nicotine Exposure</div>
+            
+            <div class="form-group" style="margin-bottom:1rem;">
+              <label>Smoking Status:</label>
+              <div class="pill-group" id="smoke-status-pills">
+                <span class="option-pill active" data-val="never">Never Smoked</span>
+                <span class="option-pill" data-val="former">Former Smoker (Quit)</span>
+                <span class="option-pill" data-val="current">Current Smoker</span>
+              </div>
+            </div>
+
+            <!-- Conditional Smoking Details -->
+            <div id="smoke-details-box" style="display:none; margin-top:1rem; padding-top:1rem; border-top:1px dashed var(--border-card);">
+              <div class="form-grid">
+                <div class="form-group">
+                  <label for="inp-cigs-day">Cigarettes per Day</label>
+                  <input type="number" id="inp-cigs-day" class="form-input" min="0" value="15" placeholder="e.g. 15">
+                </div>
+                <div class="form-group">
+                  <label for="inp-years-smoked">Years Smoked</label>
+                  <input type="number" id="inp-years-smoked" class="form-input" min="0" value="20" placeholder="e.g. 20">
+                </div>
+                <div class="form-group" style="display:flex; align-items:center; justify-content:center;">
+                  <div style="background:var(--qld-teal-light); border:1px solid var(--qld-teal); padding:0.5rem 1rem; border-radius:4px; text-align:center;">
+                    <div style="font-size:0.75rem; color:var(--qld-teal); text-transform:uppercase; font-weight:700;">Calculated Pack-Years</div>
+                    <div id="pack-years-display" style="font-size:1.3rem; font-weight:800; color:var(--qld-teal);">15.0</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Vaping / E-Cigarettes -->
+            <div class="form-group" style="margin-top:1rem;">
+              <label>E-Cigarette / Vaping Device Usage:</label>
+              <div class="pill-group" id="vape-status-pills">
+                <span class="option-pill active" data-val="no">No</span>
+                <span class="option-pill" data-val="daily">Yes, Daily</span>
+                <span class="option-pill" data-val="occasional">Yes, Occasionally</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Alcohol Consumption -->
+          <div style="background:#f8fafc; border:1px solid var(--border-card); border-radius:var(--radius-md); padding:1.25rem; margin-bottom:1.25rem;">
+            <div class="section-header-bar" style="margin-top:0;">2. Alcohol Intake</div>
+            <div class="form-group" style="margin-bottom:1rem;">
+              <label>Alcohol Intake Frequency:</label>
+              <div class="pill-group" id="alcohol-status-pills">
+                <span class="option-pill active" data-val="none">Non-Drinker</span>
+                <span class="option-pill" data-val="occasional">Occasional (1-2 drinks/month)</span>
+                <span class="option-pill" data-val="moderate">Moderate (1-10 std drinks/week)</span>
+                <span class="option-pill" data-val="heavy">Heavy (> 10 std drinks/week)</span>
+              </div>
+            </div>
+
+            <div id="alcohol-qty-box" style="display:none;">
+              <div class="form-group">
+                <label for="inp-drinks-week">Approximate Standard Drinks per Week</label>
+                <input type="number" id="inp-drinks-week" class="form-input" min="0" value="8" style="max-width:200px;">
+              </div>
+            </div>
+          </div>
+
+          <!-- Recreational Drugs Screen -->
+          <div style="background:#f8fafc; border:1px solid var(--border-card); border-radius:var(--radius-md); padding:1.25rem; margin-bottom:1.25rem;">
+            <div class="section-header-bar" style="margin-top:0;">3. Recreational / Substance Exposure (Confidential)</div>
+            <div class="form-group">
+              <label>Select any applicable items:</label>
+              <div class="checkbox-grid">
+                <label class="checkbox-pill"><input type="checkbox" name="rec-drug" value="None" checked> None</label>
+                <label class="checkbox-pill"><input type="checkbox" name="rec-drug" value="Cannabis / Marijuana"> Cannabis / Marijuana</label>
+                <label class="checkbox-pill"><input type="checkbox" name="rec-drug" value="Cocaine / Amphetamines / MDMA"> Cocaine / Amphetamines / MDMA</label>
+                <label class="checkbox-pill"><input type="checkbox" name="rec-drug" value="Opioids"> Opioids</label>
+                <label class="checkbox-pill"><input type="checkbox" name="rec-drug" value="Prefer not to say"> Prefer not to say</label>
+              </div>
+            </div>
+          </div>
+
+          <!-- Occupational & Environmental Exposures -->
+          <div style="background:#f8fafc; border:1px solid var(--border-card); border-radius:var(--radius-md); padding:1.25rem;">
+            <div class="section-header-bar" style="margin-top:0;">4. Occupational & Noise Exposures</div>
+            <div class="form-group">
+              <label>Are you regularly exposed to any of the following?</label>
+              <div class="checkbox-grid">
+                <label class="checkbox-pill"><input type="checkbox" name="occ-exp" value="Industrial / Loud Noise Exposure (without ear protection)"> Industrial / Loud Noise</label>
+                <label class="checkbox-pill"><input type="checkbox" name="occ-exp" value="Wood Dust / Carpentry"> Wood Dust / Carpentry</label>
+                <label class="checkbox-pill"><input type="checkbox" name="occ-exp" value="Heavy Chemical / Solvent Fumes"> Chemical / Solvent Fumes</label>
+                <label class="checkbox-pill"><input type="checkbox" name="occ-exp" value="Asbestos"> Asbestos</label>
+                <label class="checkbox-pill"><input type="checkbox" name="occ-exp" value="None of the above" checked> None of the above</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="btn-group">
+            <button class="btn btn-secondary" id="btn-step4-prev">⬅ Back</button>
+            <button class="btn btn-primary" id="btn-step4-next">Review & Submit ➔</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 5: REVIEW & SUBMIT -->
+      <div id="patient-step-5" class="step-card" style="display:none;">
+        <div class="glass-card">
+          <h2 class="card-title">✅ Section E: Final Review & Submission</h2>
+          <p class="card-subtitle">Please verify your entries before transmitting your intake details to the clinical team.</p>
+
+          <div id="red-flag-review-box">
+            <!-- Dynamic Red flag review injected here if triggered -->
+          </div>
+
+          <div id="intake-summary-preview" style="background:#f8fafc; border:1px solid var(--border-card); border-radius:var(--radius-md); padding:1.25rem; font-size:0.9rem; line-height:1.6; margin-bottom:1.5rem; font-family:monospace;">
+            <!-- Live summary preview -->
+          </div>
+
+          <div class="btn-group">
+            <button class="btn btn-secondary" id="btn-step5-prev">⬅ Back</button>
+            <button class="btn btn-success" id="btn-submit-intake">🚀 Transmit to Specialist Dashboard</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- SUBMISSION SUCCESS SCREEN -->
+      <div id="patient-step-success" class="step-card" style="display:none;">
+        <div class="glass-card" style="text-align:center; padding:3rem 2rem;">
+          <div style="font-size:3.5rem; margin-bottom:1rem;">📋</div>
+          <h2 class="card-title" style="justify-content:center; color:var(--qld-teal);">Clinical Intake Transmitted</h2>
+          <p class="card-subtitle">Your pre-consultation record has been formatted and loaded into the specialist consultation queue.</p>
+          
+          <div style="background:#f8fafc; border:1px solid var(--border-card); display:inline-block; padding:1.5rem; border-radius:8px; margin:1.5rem 0;">
+            <div style="font-size:0.8rem; color:var(--text-secondary); text-transform:uppercase; margin-bottom:0.3rem; font-weight:700;">Record Reference ID</div>
+            <div style="font-family:monospace; font-size:1.5rem; font-weight:800; color:var(--qld-maroon);">#ENT-INTAKE-8941</div>
+          </div>
+
+          <div>
+            <button class="btn btn-primary" id="btn-view-in-doctor-dash">🩺 Open Doctor EMR Dashboard View</button>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- VIEW 2: CLINICIAN EMR DASHBOARD                           -->
+    <!-- ========================================================= -->
+    <section id="view-doctor" class="view-section">
+      
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem;">
+        <div>
+          <h2 style="font-family:var(--font-heading); font-size:1.6rem; font-weight:800; color:var(--qld-teal);">Consultation EMR Summary Generator</h2>
+          <p style="font-size:0.9rem; color:var(--text-secondary);">Automated HPI & SOAP note builder formatted for Australian EMR systems (Genie / Best Practice / MedicalDirector).</p>
+        </div>
+        
+        <div>
+          <button class="btn btn-primary" id="btn-copy-emr">📋 Copy Note for EMR</button>
+          <button class="btn btn-secondary" onclick="window.print()">🖨️ Print Summary</button>
+        </div>
+      </div>
+
+      <div class="doctor-layout">
+        
+        <!-- Left Column: Formatted EMR Note Block -->
+        <div>
+          <div class="glass-card" style="padding:1.25rem;">
+            <h3 style="font-size:1rem; margin-bottom:0.75rem; color:var(--qld-teal); display:flex; align-items:center; gap:0.5rem;">
+              <span>📝</span> Clinical Progress Note (EMR Ready)
+            </h3>
+            
+            <div class="emr-text-box" id="emr-output-text">
+              <!-- Dynamically populated EMR Note text -->
+            </div>
+
+            <div class="emr-actions">
+              <button class="btn btn-primary" id="btn-copy-emr-2" style="flex:1;">📋 Copy EMR Text to Clipboard</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Column: Visual Summary & Suggested Workup -->
+        <div>
+          
+          <!-- Red Flag Alerts Container -->
+          <div id="doc-red-flag-alert-box" style="display:none;">
+            <!-- Populated via JS if red flags exist -->
+          </div>
+
+          <!-- Patient Summary Card -->
+          <div class="glass-card" style="padding:1.25rem;">
+            <h3 style="font-size:1rem; margin-bottom:1rem; color:var(--qld-teal); display:flex; align-items:center; gap:0.5rem;">
+              <span>📊</span> Visual Clinical Summary
+            </h3>
+
+            <div class="summary-item">
+              <div class="summary-label">Patient Details</div>
+              <div class="summary-val" id="doc-sum-demographics">John Smith (M, 46 y/o)</div>
+            </div>
+
+            <div class="summary-item">
+              <div class="summary-label">Chief Complaint & Systems</div>
+              <div class="summary-val" id="doc-sum-cc">Ear & Hearing</div>
+            </div>
+
+            <div class="summary-item">
+              <div class="summary-label">Social History Highlights</div>
+              <div class="summary-val" id="doc-sum-social">Non-smoker | Non-drinker | Occ Noise Exposure</div>
+            </div>
+
+            <div class="summary-item">
+              <div class="summary-label">Past Medical / Allergies</div>
+              <div class="summary-val" id="doc-sum-med">Hypertension | Allergies: Penicillin</div>
+            </div>
+          </div>
+
+          <!-- Suggested ENT Examination & Workup Checklist -->
+          <div class="glass-card" style="padding:1.25rem;">
+            <h3 style="font-size:1rem; margin-bottom:0.75rem; color:var(--qld-teal); display:flex; align-items:center; gap:0.5rem;">
+              <span>✅</span> Recommended ENT Workup Checklist
+            </h3>
+            
+            <div id="doc-workup-checklist" style="display:flex; flex-direction:column; gap:0.5rem;">
+              <!-- Populated via JS -->
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- Toast Notification element -->
+  <div class="toast" id="toast">
+    <span>✅</span>
+    <span id="toast-msg">EMR Note copied to clipboard!</span>
+  </div>
+
+  <!-- JavaScript Files -->
+  <script src="ent-data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
