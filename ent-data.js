@@ -26,7 +26,7 @@ const ENT_DATA = {
     {
       id: "neck",
       title: "Neck & Head",
-      icon: "🎗️",
+      icon: "🗣️",
       description: "Neck lumps, swollen glands, facial weakness, gland pain"
     },
     {
