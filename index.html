@@ -140,7 +140,7 @@
           <!-- Medical Conditions -->
           <div class="form-group" style="margin-bottom:1.5rem;">
             <div class="section-header-bar">Pre-Existing Medical Conditions (Check all that apply)</div>
-            <div class="checkbox-grid">
+            <div class="checkbox-grid" style="margin-bottom:1rem;">
               <label class="checkbox-pill"><input type="checkbox" name="med-cond" value="Hypertension"> High Blood Pressure</label>
               <label class="checkbox-pill"><input type="checkbox" name="med-cond" value="Diabetes"> Diabetes Mellitus</label>
               <label class="checkbox-pill"><input type="checkbox" name="med-cond" value="Asthma"> Asthma / Reactive Airway</label>
@@ -151,6 +151,12 @@
               <label class="checkbox-pill"><input type="checkbox" name="med-cond" value="Stroke / TIA"> Stroke / TIA</label>
               <label class="checkbox-pill"><input type="checkbox" name="med-cond" value="Bleeding Disorder"> Bleeding Disorder / Anticoagulated</label>
               <label class="checkbox-pill"><input type="checkbox" name="med-cond" value="Has medical conditions (Unsure of exact names)"> ❓ Have medical conditions, but UNSURE of exact names</label>
+            </div>
+
+            <!-- Custom Other Conditions Field -->
+            <div class="form-group">
+              <label for="inp-other-conditions">Other Specific Medical Conditions (Optional):</label>
+              <input type="text" id="inp-other-conditions" class="form-input" placeholder="e.g. Thyroid disorder, Epilepsy, Kidney disease, Rheumatoid arthritis (or leave blank if none)">
             </div>
           </div>
 
