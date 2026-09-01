@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
       fullName: 'John Smith',
       dob: '1980-06-15',
       gender: 'Male',
+      urn: '1234567',
       phone: '0412 345 678',
       medicare: '2123 45678 1'
     },
@@ -346,6 +347,7 @@ document.addEventListener('DOMContentLoaded', () => {
     state.patientInfo.fullName = document.getElementById('inp-fullname')?.value || 'N/A';
     state.patientInfo.dob = document.getElementById('inp-dob')?.value || 'N/A';
     state.patientInfo.gender = document.getElementById('inp-gender')?.value || 'Male';
+    state.patientInfo.urn = document.getElementById('inp-urn')?.value || 'N/A';
     state.patientInfo.phone = document.getElementById('inp-phone')?.value || 'N/A';
     state.patientInfo.medicare = document.getElementById('inp-medicare')?.value || 'N/A';
   }
@@ -491,7 +493,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Visual summary items
     const demo = document.getElementById('doc-sum-demographics');
-    if (demo) demo.textContent = `${state.patientInfo.fullName} (${state.patientInfo.gender}, DOB: ${state.patientInfo.dob})`;
+    if (demo) demo.textContent = `${state.patientInfo.fullName} (${state.patientInfo.gender}, DOB: ${state.patientInfo.dob}) | URN: ${state.patientInfo.urn || 'N/A'}`;
 
     const cc = document.getElementById('doc-sum-cc');
     if (cc) cc.textContent = state.selectedRegions.map(r => r.toUpperCase()).join(', ');
@@ -576,6 +578,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (document.getElementById('inp-fullname')) document.getElementById('inp-fullname').value = state.patientInfo.fullName;
     if (document.getElementById('inp-dob')) document.getElementById('inp-dob').value = state.patientInfo.dob;
     if (document.getElementById('inp-gender')) document.getElementById('inp-gender').value = state.patientInfo.gender;
+    if (document.getElementById('inp-urn')) document.getElementById('inp-urn').value = state.patientInfo.urn || '';
     if (document.getElementById('inp-phone')) document.getElementById('inp-phone').value = state.patientInfo.phone;
     if (document.getElementById('inp-medicare')) document.getElementById('inp-medicare').value = state.patientInfo.medicare;
 
