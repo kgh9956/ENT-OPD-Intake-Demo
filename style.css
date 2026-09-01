@@ -1,0 +1,684 @@
+/* ENT SmartIntake Pro - Queensland Health (QLD Health) Official Clinical Style */
+
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700;800&family=Public+Sans:wght@500;600;700;800&display=swap');
+
+:root {
+  /* Queensland Health Branding Palette */
+  --qld-maroon: #741334;        /* Iconic QLD Government Maroon */
+  --qld-maroon-dark: #500a22;
+  --qld-teal: #004b6e;          /* QLD Health Deep Clinical Teal */
+  --qld-teal-light: #e6f0f5;
+  --qld-blue-accent: #0284c7;
+  
+  --bg-primary: #f4f7f9;         /* Clean clinical off-white */
+  --bg-card: #ffffff;            /* Crisp white cards */
+  --border-card: #cbd5e1;        /* Crisp document border */
+  --border-focus: #004b6e;
+  
+  --text-primary: #1e293b;      /* Dark charcoal text for maximum legibility */
+  --text-secondary: #475569;    /* Muted slate text */
+  --text-muted: #64748b;
+  
+  --shadow-card: 0 2px 8px rgba(15, 23, 42, 0.08);
+  --shadow-hover: 0 4px 14px rgba(15, 23, 42, 0.12);
+  --radius-lg: 8px;              /* Clean, crisp document radii (not rounded bubble style) */
+  --radius-md: 6px;
+  --radius-sm: 4px;
+  
+  --font-heading: 'Public Sans', -apple-system, sans-serif;
+  --font-body: 'Open Sans', -apple-system, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  min-height: 100vh;
+  line-height: 1.6;
+  padding-bottom: 60px;
+}
+
+/* Official Queensland Health Top Header Bar */
+.gov-top-bar {
+  background: var(--qld-maroon);
+  color: #ffffff;
+  padding: 0.4rem 2rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.gov-top-bar-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.2rem 2rem;
+  background: #ffffff;
+  border-bottom: 3px solid var(--qld-teal);
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.brand-badge-logo {
+  background: var(--qld-teal);
+  color: #fff;
+  font-weight: 800;
+  font-size: 0.85rem;
+  padding: 0.4rem 0.75rem;
+  border-radius: var(--radius-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.brand-title-group h1 {
+  font-family: var(--font-heading);
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--qld-teal);
+  line-height: 1.2;
+}
+
+.brand-subtitle {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.header-controls {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* Mode Switcher Tabs */
+.mode-tabs {
+  display: flex;
+  background: #f1f5f9;
+  padding: 4px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-card);
+}
+
+.mode-btn {
+  border: none;
+  background: transparent;
+  color: var(--text-secondary);
+  padding: 0.5rem 1.1rem;
+  font-size: 0.875rem;
+  font-weight: 700;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.mode-btn.active {
+  background: var(--qld-teal);
+  color: #ffffff;
+  box-shadow: 0 2px 6px rgba(0, 75, 110, 0.25);
+}
+
+/* Preset Toolbar */
+.preset-bar {
+  background: #ffffff;
+  border-bottom: 1px solid var(--border-card);
+  padding: 0.6rem 2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  overflow-x: auto;
+}
+
+.preset-title {
+  font-size: 0.8rem;
+  font-weight: 800;
+  color: var(--qld-maroon);
+  white-space: nowrap;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.preset-chip {
+  background: #f8fafc;
+  border: 1px solid var(--border-card);
+  color: var(--text-primary);
+  padding: 0.35rem 0.85rem;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+}
+
+.preset-chip:hover {
+  background: var(--qld-teal-light);
+  color: var(--qld-teal);
+  border-color: var(--qld-teal);
+}
+
+/* Main Layout Container */
+.main-container {
+  max-width: 1100px;
+  margin: 1.75rem auto;
+  padding: 0 1.25rem;
+}
+
+.view-section {
+  display: none;
+}
+
+.view-section.active-view {
+  display: block;
+  animation: fadeIn 0.25s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Kiosk Progress Bar */
+.kiosk-progress-container {
+  margin-bottom: 1.5rem;
+  background: #ffffff;
+  padding: 1rem 1.5rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-card);
+  box-shadow: var(--shadow-card);
+}
+
+.kiosk-progress-bar {
+  height: 8px;
+  background: #e2e8f0;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 0.75rem;
+}
+
+.kiosk-progress-fill {
+  height: 100%;
+  width: 20%;
+  background: var(--qld-teal);
+  transition: width 0.3s ease;
+}
+
+.kiosk-steps {
+  display: flex;
+  justify-content: space-between;
+}
+
+.step-item {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text-muted);
+}
+
+.step-item.active {
+  color: var(--qld-maroon);
+}
+
+.step-item.completed {
+  color: var(--qld-teal);
+}
+
+/* Official Document Style Card */
+.glass-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-card);
+  border-top: 4px solid var(--qld-teal);
+  border-radius: var(--radius-md);
+  padding: 1.75rem;
+  box-shadow: var(--shadow-card);
+  margin-bottom: 1.5rem;
+}
+
+.card-title {
+  font-family: var(--font-heading);
+  font-size: 1.35rem;
+  font-weight: 800;
+  margin-bottom: 0.4rem;
+  color: var(--qld-teal);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-bottom: 2px solid #e2e8f0;
+  padding-bottom: 0.5rem;
+}
+
+.card-subtitle {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  margin-bottom: 1.5rem;
+  margin-top: 0.5rem;
+}
+
+/* Section Header Bar */
+.section-header-bar {
+  border-left: 4px solid var(--qld-maroon);
+  padding-left: 0.75rem;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--qld-teal);
+  margin-top: 1.25rem;
+  margin-bottom: 1rem;
+}
+
+/* Form Layout */
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.25rem;
+  margin-bottom: 1.25rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.form-group label {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.form-input, .form-select, .form-textarea {
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  border-radius: var(--radius-sm);
+  padding: 0.65rem 0.85rem;
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: 0.925rem;
+  transition: border-color 0.2s ease;
+}
+
+.form-input:focus, .form-select:focus, .form-textarea:focus {
+  outline: none;
+  border-color: var(--qld-teal);
+  box-shadow: 0 0 0 3px rgba(0, 75, 110, 0.15);
+}
+
+/* Region Selector Cards (Clean QLD Health Style) */
+.region-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.75rem;
+}
+
+.region-card {
+  background: #ffffff;
+  border: 2px solid #cbd5e1;
+  border-radius: var(--radius-md);
+  padding: 1.25rem 1rem;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  position: relative;
+}
+
+.region-card:hover {
+  border-color: var(--qld-teal);
+  background: var(--qld-teal-light);
+  transform: translateY(-2px);
+}
+
+.region-card.selected {
+  border-color: var(--qld-teal);
+  background: var(--qld-teal-light);
+  box-shadow: 0 4px 10px rgba(0, 75, 110, 0.15);
+}
+
+.region-icon {
+  font-size: 2.2rem;
+}
+
+.region-title {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--qld-teal);
+}
+
+.region-desc {
+  font-size: 0.775rem;
+  color: var(--text-secondary);
+}
+
+.region-check {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+  border: 1px solid #94a3b8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  background: #fff;
+}
+
+.region-card.selected .region-check {
+  background: var(--qld-teal);
+  border-color: var(--qld-teal);
+  color: #fff;
+  font-weight: 800;
+}
+
+/* Option Pill Selectors (Uniform Clean Clinical Style) */
+.pill-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.4rem;
+}
+
+.option-pill {
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  color: var(--text-primary);
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  user-select: none;
+}
+
+.option-pill:hover {
+  background: #f1f5f9;
+  border-color: var(--qld-teal);
+}
+
+.option-pill.active {
+  background: var(--qld-teal);
+  color: #ffffff;
+  font-weight: 700;
+  border-color: var(--qld-teal);
+}
+
+/* Checkbox Pills Grid */
+.checkbox-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 0.65rem;
+  margin-top: 0.5rem;
+}
+
+.checkbox-pill {
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  border-radius: 4px;
+  padding: 0.65rem 0.85rem;
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.checkbox-pill:hover {
+  background: #f8fafc;
+  border-color: var(--qld-teal);
+}
+
+.checkbox-pill.active {
+  background: var(--qld-teal-light);
+  border-color: var(--qld-teal);
+  color: var(--qld-teal);
+  font-weight: 600;
+}
+
+.checkbox-pill input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--qld-teal);
+}
+
+/* Range Slider */
+.slider-container {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 0.4rem;
+}
+
+.slider-container input[type="range"] {
+  flex: 1;
+  accent-color: var(--qld-teal);
+  height: 6px;
+}
+
+.slider-val-badge {
+  background: var(--qld-teal);
+  color: #ffffff;
+  font-weight: 800;
+  padding: 0.2rem 0.65rem;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  min-width: 45px;
+  text-align: center;
+}
+
+/* Red Flag Warning Box (Queensland Health Clinical Alert Format) */
+.red-flag-box {
+  background: #fef2f2;
+  border: 1px solid #fca5a5;
+  border-left: 5px solid var(--qld-maroon);
+  border-radius: 4px;
+  padding: 1rem 1.25rem;
+  margin-top: 1rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.85rem;
+}
+
+.red-flag-icon {
+  font-size: 1.4rem;
+  color: var(--qld-maroon);
+}
+
+.red-flag-content h4 {
+  color: var(--qld-maroon);
+  font-size: 0.95rem;
+  font-weight: 800;
+  margin-bottom: 0.25rem;
+}
+
+.red-flag-content p {
+  font-size: 0.875rem;
+  color: #7f1d1d;
+}
+
+/* Buttons */
+.btn-group {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 1px solid #e2e8f0;
+}
+
+.btn {
+  padding: 0.75rem 1.5rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.btn-secondary {
+  background: #f1f5f9;
+  color: var(--text-primary);
+  border: 1px solid #cbd5e1;
+}
+
+.btn-secondary:hover {
+  background: #e2e8f0;
+}
+
+.btn-primary {
+  background: var(--qld-teal);
+  color: #ffffff;
+  box-shadow: 0 2px 6px rgba(0, 75, 110, 0.2);
+}
+
+.btn-primary:hover {
+  background: #003650;
+}
+
+.btn-success {
+  background: var(--qld-maroon);
+  color: #ffffff;
+  box-shadow: 0 2px 6px rgba(116, 19, 52, 0.25);
+}
+
+.btn-success:hover {
+  background: var(--qld-maroon-dark);
+}
+
+/* Doctor EMR Dashboard Layout */
+.doctor-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+@media (max-width: 900px) {
+  .doctor-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+.emr-text-box {
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  border-top: 3px solid var(--qld-maroon);
+  border-radius: 4px;
+  padding: 1.25rem;
+  font-family: 'Consolas', 'Courier New', monospace;
+  font-size: 0.875rem;
+  color: #0f172a;
+  white-space: pre-wrap;
+  min-height: 420px;
+  line-height: 1.6;
+  overflow-y: auto;
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.emr-actions {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+/* Summary Card Items */
+.summary-item {
+  border-bottom: 1px solid #e2e8f0;
+  padding-bottom: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.summary-item:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+}
+
+.summary-label {
+  font-size: 0.775rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--qld-teal);
+  margin-bottom: 0.2rem;
+}
+
+.summary-val {
+  font-size: 0.925rem;
+  color: var(--text-primary);
+}
+
+/* Toast Notifications */
+.toast {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  background: var(--qld-teal);
+  color: #ffffff;
+  padding: 0.85rem 1.5rem;
+  border-radius: 4px;
+  font-weight: 700;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transform: translateY(100px);
+  opacity: 0;
+  transition: all 0.3s ease;
+  z-index: 1000;
+}
+
+.toast.show {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* Print Styles */
+@media print {
+  .gov-top-bar, header, .preset-bar, .mode-tabs, .btn-group, .emr-actions {
+    display: none !important;
+  }
+  body {
+    background: #fff !important;
+    color: #000 !important;
+  }
+  .glass-card, .emr-text-box {
+    background: #fff !important;
+    border: 1px solid #ccc !important;
+    color: #000 !important;
+    box-shadow: none !important;
+  }
+}
