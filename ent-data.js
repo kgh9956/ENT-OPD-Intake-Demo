@@ -347,6 +347,7 @@ const ENT_DATA = {
           fullName: "David Miller",
           dob: "1978-04-12",
           gender: "Male",
+          urn: "7891234",
           phone: "0412 345 678",
           medicare: "2123 45678 1"
         },
@@ -385,6 +386,7 @@ const ENT_DATA = {
           fullName: "Robert Taylor",
           dob: "1962-09-25",
           gender: "Male",
+          urn: "6254891",
           phone: "0488 987 654",
           medicare: "3987 65432 1"
         },
@@ -427,6 +429,7 @@ const ENT_DATA = {
           fullName: "Emma Watson",
           dob: "1990-11-03",
           gender: "Female",
+          urn: "9011452",
           phone: "0433 111 222",
           medicare: "4111 22233 1"
         },
@@ -463,6 +466,7 @@ const ENT_DATA = {
           fullName: "James Wilson",
           dob: "1975-02-18",
           gender: "Male",
+          urn: "7502981",
           phone: "0400 555 777",
           medicare: "5555 77799 1"
         },
@@ -512,7 +516,7 @@ function generateEMRNote(formData) {
   note.push(`EAR, NOSE AND THROAT (ENT) SERVICE | PRE-CONSULTATION INTAKE SUMMARY`);
   note.push(`--------------------------------------------------------------------------------`);
   note.push(`PATIENT NAME: ${p.fullName || 'N/A'}`);
-  note.push(`DOB: ${p.dob || 'N/A'}    GENDER: ${p.gender || 'N/A'}    MEDICARE: ${p.medicare || 'N/A'}`);
+  note.push(`DOB: ${p.dob || 'N/A'}    GENDER: ${p.gender || 'N/A'}    URN: ${p.urn || 'N/A'}    MEDICARE: ${p.medicare || 'N/A'}`);
   note.push(`PHONE: ${p.phone || 'N/A'}    ASSESSMENT DATE: ${new Date().toLocaleDateString('en-AU')}`);
   note.push(`--------------------------------------------------------------------------------`);
   note.push(``);
@@ -526,7 +530,7 @@ function generateEMRNote(formData) {
   }
   note.push(``);
 
-  // PRESENTING COMPLAINTS (Updated heading per request)
+  // PRESENTING COMPLAINTS
   note.push(`2. PRESENTING COMPLAINTS:`);
   if (formData.regions && formData.regions.length > 0) {
     note.push(`   Systems Selected: ${formData.regions.map(r => r.toUpperCase()).join(', ')}`);
@@ -561,12 +565,12 @@ function generateEMRNote(formData) {
   }
   note.push(``);
 
-  // CURRENT MEDICATIONS (Separated per request)
+  // CURRENT MEDICATIONS
   note.push(`4. CURRENT MEDICATIONS:`);
   note.push(`   - ${m.medications || 'Nil regular medications reported'}`);
   note.push(``);
 
-  // ALLERGIES & ADVERSE REACTIONS (Separated per request)
+  // ALLERGIES & ADVERSE REACTIONS
   note.push(`5. ALLERGIES & ADVERSE REACTIONS:`);
   note.push(`   - ${m.allergies || 'Nil Known Drug Allergies (NKDA)'}`);
   note.push(``);
