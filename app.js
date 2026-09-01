@@ -20,6 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
     symptomData: {},
     medicalHx: {
       conditions: [],
+      otherConditions: '',
       surgeries: '',
       medications: '',
       allergies: ''
@@ -355,6 +356,7 @@ document.addEventListener('DOMContentLoaded', () => {
   function gatherMedicalHx() {
     const checkedConds = Array.from(document.querySelectorAll('input[name="med-cond"]:checked')).map(cb => cb.value);
     state.medicalHx.conditions = checkedConds;
+    state.medicalHx.otherConditions = document.getElementById('inp-other-conditions')?.value.trim() || '';
 
     let surg = document.getElementById('inp-surgeries')?.value || '';
     if (document.getElementById('chk-surgery-unsure')?.checked && !surg.includes("Unsure")) {
@@ -510,7 +512,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const med = document.getElementById('doc-sum-med');
     if (med) {
-      med.textContent = `Cond: ${state.medicalHx.conditions.join(', ') || 'Nil'} | Meds: ${state.medicalHx.medications} | Allergies: ${state.medicalHx.allergies || 'Nil'}`;
+      let allConds = [ ...state.medicalHx.conditions ];
+      if (state.medicalHx.otherConditions) allConds.push(state.medicalHx.otherConditions);
+      med.textContent = `Cond: ${allConds.join(', ') || 'Nil'} | Meds: ${state.medicalHx.medications} | Allergies: ${state.medicalHx.allergies || 'Nil'}`;
     }
 
     // Red flag alerts container
@@ -582,6 +586,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (document.getElementById('inp-phone')) document.getElementById('inp-phone').value = state.patientInfo.phone;
     if (document.getElementById('inp-medicare')) document.getElementById('inp-medicare').value = state.patientInfo.medicare;
 
+    if (document.getElementById('inp-other-conditions')) document.getElementById('inp-other-conditions').value = state.medicalHx.otherConditions || '';
     if (document.getElementById('inp-surgeries')) document.getElementById('inp-surgeries').value = state.medicalHx.surgeries;
     if (document.getElementById('inp-medications')) document.getElementById('inp-medications').value = state.medicalHx.medications;
     if (document.getElementById('inp-allergies')) document.getElementById('inp-allergies').value = state.medicalHx.allergies;
