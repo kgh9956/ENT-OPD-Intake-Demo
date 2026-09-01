@@ -365,6 +365,7 @@ const ENT_DATA = {
         },
         medicalHx: {
           conditions: ["Hypertension"],
+          otherConditions: "",
           surgeries: ["None"],
           medications: "Amlodipine 5mg daily",
           allergies: "Penicillin (Rash)"
@@ -405,6 +406,7 @@ const ENT_DATA = {
         },
         medicalHx: {
           conditions: ["COPD", "GORD / Acid Reflux"],
+          otherConditions: "",
           surgeries: ["Appendicectomy 1985"],
           medications: "Seretide inhaler, Pantoprazole 40mg",
           allergies: "Nil known drug allergies"
@@ -445,6 +447,7 @@ const ENT_DATA = {
         },
         medicalHx: {
           conditions: ["Asthma", "Allergic Rhinitis"],
+          otherConditions: "",
           surgeries: ["Tonsillectomy 2005"],
           medications: "Ventolin PRN, Nasonex nasal spray",
           allergies: "Aspirin (Exacerbates asthma)"
@@ -481,6 +484,7 @@ const ENT_DATA = {
         },
         medicalHx: {
           conditions: ["Hypertension", "Obesity (BMI 33)", "Type 2 Diabetes"],
+          otherConditions: "",
           surgeries: ["None"],
           medications: "Perindopril 5mg, Metformin 1000mg BD",
           allergies: "Nil"
@@ -553,8 +557,12 @@ function generateEMRNote(formData) {
 
   // PAST MEDICAL & SURGICAL HX
   note.push(`3. PAST MEDICAL & SURGICAL HISTORY:`);
-  if (m.conditions && m.conditions.length > 0) {
-    note.push(`   - Medical Conditions: ${m.conditions.join(', ')}`);
+  let condList = [ ...(m.conditions || []) ];
+  if (m.otherConditions) {
+    condList.push(m.otherConditions);
+  }
+  if (condList.length > 0) {
+    note.push(`   - Medical Conditions: ${condList.join(', ')}`);
   } else {
     note.push(`   - Medical Conditions: Nil reported`);
   }
