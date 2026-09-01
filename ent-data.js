@@ -8,31 +8,31 @@ const ENT_DATA = {
     {
       id: "ear",
       title: "Ear & Hearing",
-      icon: "👂",
+      icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8.5C6 5.5 8.5 3 12.5 3C16 3 18.5 5.5 18.5 9.5C18.5 13.5 15.5 16 13 17.5C11.5 18.4 10.5 20 10.5 21"/><path d="M11 8.5C11 7 12 6 13.5 6C15 6 16 7 16 9C16 11 14 12.5 12.5 13.5"/><path d="M12.5 11C11.67 11 11 11.67 11 12.5"/></svg>`,
       description: "Hearing loss, tinnitus, ear pain, discharge, fullness, dizziness"
     },
     {
       id: "nose",
       title: "Nose & Sinus",
-      icon: "👃",
+      icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3C10.5 6 9.5 9.5 9.5 12C9.5 13.5 9 14.5 7.5 15.5C6 16.5 5 18 6 19.5C7 21 9 21 12 21C15 21 17 21 18 19.5C19 18 18 16.5 16.5 15.5C15 14.5 14.5 13.5 14.5 12C14.5 9.5 13.5 6 12 3Z"/><path d="M9.5 17C10 18 11 18.5 12 18.5C13 18.5 14 18 14.5 17"/></svg>`,
       description: "Blockage, runny nose, sinus pressure, nosebleeds, smell loss"
     },
     {
       id: "throat",
       title: "Throat & Voice",
-      icon: "👄",
+      icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3C7 3 9 7 9 10C9 14 6 15 6 18C6 20 8 21 12 21C16 21 18 20 18 18C18 15 15 14 15 10C15 7 17 3 17 3"/><path d="M10 11C11 12 13 12 14 11"/><path d="M9.5 14C11 15.5 13 15.5 14.5 14"/></svg>`,
       description: "Sore throat, difficulty swallowing, voice change/hoarseness, globus"
     },
     {
       id: "neck",
       title: "Neck & Head",
-      icon: "🗣️",
+      icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3C8.13 3 5 6.13 5 10C5 12.8 6.64 15.22 9 16.3V21H15V16.3C17.36 15.22 19 12.8 19 10C19 6.13 15.87 3 12 3Z"/><path d="M9 18H15"/><path d="M10 14.5C11 15 13 15 14 14.5"/></svg>`,
       description: "Neck lumps, swollen glands, facial weakness, gland pain"
     },
     {
       id: "sleep",
       title: "Sleep & Airway",
-      icon: "😴",
+      icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/><path d="M6 18c2-2 4-2 6 0s4 2 6 0"/></svg>`,
       description: "Loud snoring, breathing pauses, waking gasping, daytime fatigue"
     }
   ],
