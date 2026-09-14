@@ -2,9 +2,10 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
   <title>Specialist Outpatient Intake | ENT Clinical Assessment</title>
   <meta name="description" content="Ear, Nose and Throat (ENT) Specialist Outpatient Pre-Consultation Intake System & EMR Generator.">
+  <meta name="theme-color" content="#004b6e">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -53,12 +54,16 @@
         <div class="kiosk-progress-bar">
           <div class="kiosk-progress-fill" id="progress-fill"></div>
         </div>
+        <div class="kiosk-step-header-mobile">
+          <span class="step-badge-mobile" id="mobile-step-badge">Step 1 of 5</span>
+          <span class="step-title-mobile" id="mobile-step-title">Patient Details</span>
+        </div>
         <div class="kiosk-steps">
-          <span class="step-item active" id="step-lbl-1">1. Patient Details</span>
-          <span class="step-item" id="step-lbl-2">2. Symptoms</span>
-          <span class="step-item" id="step-lbl-3">3. Medical History</span>
-          <span class="step-item" id="step-lbl-4">4. Social History</span>
-          <span class="step-item" id="step-lbl-5">5. Review & Submit</span>
+          <span class="step-item active" id="step-lbl-1"><span class="step-dot">1</span><span class="step-lbl-text">Patient Details</span></span>
+          <span class="step-item" id="step-lbl-2"><span class="step-dot">2</span><span class="step-lbl-text">Symptoms</span></span>
+          <span class="step-item" id="step-lbl-3"><span class="step-dot">3</span><span class="step-lbl-text">Medical History</span></span>
+          <span class="step-item" id="step-lbl-4"><span class="step-dot">4</span><span class="step-lbl-text">Social History</span></span>
+          <span class="step-item" id="step-lbl-5"><span class="step-dot">5</span><span class="step-lbl-text">Review & Submit</span></span>
         </div>
       </div>
 
@@ -72,11 +77,11 @@
           <div class="form-grid">
             <div class="form-group">
               <label for="inp-fullname">Full Name *</label>
-              <input type="text" id="inp-fullname" class="form-input" placeholder="e.g. John Smith" value="John Smith">
+              <input type="text" id="inp-fullname" class="form-input" placeholder="e.g. John Smith" value="John Smith" autocomplete="name">
             </div>
             <div class="form-group">
               <label for="inp-dob">Date of Birth *</label>
-              <input type="date" id="inp-dob" class="form-input" value="1980-06-15">
+              <input type="date" id="inp-dob" class="form-input" value="1980-06-15" autocomplete="bday">
             </div>
             <div class="form-group">
               <label for="inp-gender">Gender</label>
@@ -88,11 +93,11 @@
             </div>
             <div class="form-group">
               <label for="inp-urn">URN</label>
-              <input type="text" id="inp-urn" class="form-input" placeholder="e.g. 1234567" value="1234567">
+              <input type="text" id="inp-urn" class="form-input" placeholder="e.g. 1234567" value="1234567" inputmode="numeric">
             </div>
             <div class="form-group">
               <label for="inp-phone">Contact Phone Number</label>
-              <input type="tel" id="inp-phone" class="form-input" placeholder="0412 345 678" value="0412 345 678">
+              <input type="tel" id="inp-phone" class="form-input" placeholder="0412 345 678" value="0412 345 678" autocomplete="tel">
             </div>
             <div class="form-group">
               <label for="inp-medicare">Medicare Card Number / Ref</label>
@@ -190,7 +195,7 @@
             <div class="form-group">
               <label for="inp-allergies">Medication Allergies & Adverse Reactions</label>
               <input type="text" id="inp-allergies" class="form-input" placeholder="e.g. Penicillin (Rash) or 'Nil known drug allergies'">
-              <div style="display:flex; gap:0.5rem; margin-top:0.4rem;">
+              <div class="quick-allergies-row">
                 <label class="checkbox-pill" style="padding:0.4rem 0.75rem; font-size:0.8rem;"><input type="checkbox" id="chk-nkda"> ✅ Nil Known Drug Allergies (NKDA)</label>
                 <label class="checkbox-pill" style="padding:0.4rem 0.75rem; font-size:0.8rem;"><input type="checkbox" id="chk-allergy-unsure"> ❓ Have allergies (Unsure drug name)</label>
               </div>
@@ -228,14 +233,14 @@
               <div class="form-grid">
                 <div class="form-group">
                   <label for="inp-cigs-day">Cigarettes per Day</label>
-                  <input type="number" id="inp-cigs-day" class="form-input" min="0" value="15" placeholder="e.g. 15">
+                  <input type="number" id="inp-cigs-day" class="form-input" min="0" value="15" placeholder="e.g. 15" inputmode="numeric">
                 </div>
                 <div class="form-group">
                   <label for="inp-years-smoked">Years Smoked</label>
-                  <input type="number" id="inp-years-smoked" class="form-input" min="0" value="20" placeholder="e.g. 20">
+                  <input type="number" id="inp-years-smoked" class="form-input" min="0" value="20" placeholder="e.g. 20" inputmode="numeric">
                 </div>
                 <div class="form-group" style="display:flex; align-items:center; justify-content:center;">
-                  <div style="background:var(--qld-teal-light); border:1px solid var(--qld-teal); padding:0.5rem 1rem; border-radius:4px; text-align:center;">
+                  <div style="background:var(--qld-teal-light); border:1px solid var(--qld-teal); padding:0.6rem 1rem; border-radius:4px; text-align:center; width:100%;">
                     <div style="font-size:0.75rem; color:var(--qld-teal); text-transform:uppercase; font-weight:700;">Calculated Pack-Years</div>
                     <div id="pack-years-display" style="font-size:1.3rem; font-weight:800; color:var(--qld-teal);">15.0</div>
                   </div>
@@ -270,7 +275,7 @@
             <div id="alcohol-qty-box" style="display:none;">
               <div class="form-group">
                 <label for="inp-drinks-week">Approximate Standard Drinks per Week</label>
-                <input type="number" id="inp-drinks-week" class="form-input" min="0" value="8" style="max-width:200px;">
+                <input type="number" id="inp-drinks-week" class="form-input" min="0" value="8" style="max-width:200px;" inputmode="numeric">
               </div>
             </div>
           </div>
@@ -322,7 +327,7 @@
             <!-- Dynamic Red flag review injected here if triggered -->
           </div>
 
-          <div id="intake-summary-preview" style="background:#f8fafc; border:1px solid var(--border-card); border-radius:var(--radius-md); padding:1.25rem; font-size:0.9rem; line-height:1.6; margin-bottom:1.5rem; font-family:monospace;">
+          <div id="intake-summary-preview" style="background:#f8fafc; border:1px solid var(--border-card); border-radius:var(--radius-md); padding:1.25rem; font-size:0.85rem; line-height:1.6; margin-bottom:1.5rem; font-family:monospace; overflow-x:auto;">
             <!-- Live summary preview -->
           </div>
 
@@ -335,18 +340,18 @@
 
       <!-- SUBMISSION SUCCESS SCREEN -->
       <div id="patient-step-success" class="step-card" style="display:none;">
-        <div class="glass-card" style="text-align:center; padding:3rem 2rem;">
+        <div class="glass-card" style="text-align:center; padding:2.5rem 1.25rem;">
           <div style="font-size:3.5rem; margin-bottom:1rem;">📋</div>
           <h2 class="card-title" style="justify-content:center; color:var(--qld-teal);">Clinical Intake Transmitted</h2>
           <p class="card-subtitle">Your pre-consultation record has been formatted and loaded into the specialist consultation queue.</p>
           
-          <div style="background:#f8fafc; border:1px solid var(--border-card); display:inline-block; padding:1.5rem; border-radius:8px; margin:1.5rem 0;">
+          <div style="background:#f8fafc; border:1px solid var(--border-card); display:inline-block; padding:1.25rem 1.5rem; border-radius:8px; margin:1.25rem 0; width:100%; max-width:320px;">
             <div style="font-size:0.8rem; color:var(--text-secondary); text-transform:uppercase; margin-bottom:0.3rem; font-weight:700;">Record Reference ID</div>
-            <div style="font-family:monospace; font-size:1.5rem; font-weight:800; color:var(--qld-maroon);">#ENT-INTAKE-8941</div>
+            <div style="font-family:monospace; font-size:1.4rem; font-weight:800; color:var(--qld-maroon);">#ENT-INTAKE-8941</div>
           </div>
 
           <div>
-            <button class="btn btn-primary" id="btn-view-in-doctor-dash">🩺 Open Doctor EMR Dashboard View</button>
+            <button class="btn btn-primary" id="btn-view-in-doctor-dash" style="width:100%; max-width:320px; justify-content:center;">🩺 Open Doctor EMR Dashboard View</button>
           </div>
         </div>
       </div>
@@ -358,13 +363,13 @@
     <!-- ========================================================= -->
     <section id="view-doctor" class="view-section">
       
-      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem;">
+      <div class="doctor-header-bar">
         <div>
-          <h2 style="font-family:var(--font-heading); font-size:1.6rem; font-weight:800; color:var(--qld-teal);">Consultation EMR Summary Generator</h2>
-          <p style="font-size:0.9rem; color:var(--text-secondary);">Automated HPI & SOAP note builder formatted for Australian EMR systems (Genie / Best Practice / MedicalDirector).</p>
+          <h2 style="font-family:var(--font-heading); font-size:1.5rem; font-weight:800; color:var(--qld-teal); line-height:1.2;">Consultation EMR Summary Generator</h2>
+          <p style="font-size:0.85rem; color:var(--text-secondary); margin-top:0.25rem;">Automated HPI & SOAP note builder formatted for Australian EMR systems (Genie / Best Practice / MedicalDirector).</p>
         </div>
         
-        <div>
+        <div class="doctor-header-actions">
           <button class="btn btn-primary" id="btn-copy-emr">📋 Copy Note for EMR</button>
           <button class="btn btn-secondary" onclick="window.print()">🖨️ Print Summary</button>
         </div>
