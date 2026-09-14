@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initEMRCopy();
 
   // Initial Render
-  updateProgressUI();
+  updateStepVisibility();
 
   // -------------------------------------------------------------
   // 1. REGION SELECTOR (STEP 1)
@@ -391,6 +391,14 @@ document.addEventListener('DOMContentLoaded', () => {
     state.socialHx.exposures = checkedExp.length > 0 ? checkedExp : ['None of the above'];
   }
 
+  const STEP_TITLES = [
+    "Patient Details",
+    "Symptoms",
+    "Medical History",
+    "Social History",
+    "Review & Submit"
+  ];
+
   function updateStepVisibility() {
     for (let i = 1; i <= 5; i++) {
       const stepEl = document.getElementById(`patient-step-${i}`);
@@ -404,6 +412,16 @@ document.addEventListener('DOMContentLoaded', () => {
         if (i < state.currentStep) lblEl.classList.add('completed');
       }
     }
+
+    // Update Mobile Step Indicators
+    const mobileBadge = document.getElementById('mobile-step-badge');
+    const mobileTitle = document.getElementById('mobile-step-title');
+    if (mobileBadge) mobileBadge.textContent = `Step ${state.currentStep} of 5`;
+    if (mobileTitle) mobileTitle.textContent = STEP_TITLES[state.currentStep - 1] || '';
+
+    // Scroll to top of current form smoothly on mobile transitions
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
     updateProgressUI();
   }
 
